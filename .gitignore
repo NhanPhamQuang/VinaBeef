@@ -1,0 +1,17 @@
+.env
+.env.local
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+.expo/
+coverage/
+*.log
+*.pyc
+.DS_Store

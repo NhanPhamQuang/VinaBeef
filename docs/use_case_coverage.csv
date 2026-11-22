@@ -1,0 +1,32 @@
+Use Case ID,Use Case Name,Module,Implementation Status,Evidence / Known Limitations
+UC-01,Register a Cattle Profile,Cattle & RFID,Implemented,POST /api/cattle; duplicates rejected
+UC-02,Update a Cattle Profile,Cattle & RFID,Implemented,PATCH /api/cattle/{id}
+UC-03,Search and View Cattle Profiles,Cattle & RFID,Implemented,GET /api/cattle; GET /api/cattle/{id}
+UC-04,Register and Assign an RFID Ear Tag,Cattle & RFID,Implemented,POST /api/cattle/{id}/tags
+UC-05,Maintain Farm and Barn Registry,Farm & Reader Setup,Partial,Farm list + barn create/list; no farm edit/archive
+UC-06,Register and Configure a Gate Reader,Farm & Reader Setup,Partial,Gate/reader create/list; advanced station lifecycle TBD
+UC-07,Process an RFID Gate Read,Movement Monitoring,Implemented (simulated hardware),POST /api/movements/read; gateway /api/edge/events
+UC-08,Monitor Barn In/Out Counts,Movement Monitoring,Implemented,GET /api/dashboard; presence and movement counts
+UC-09,Evaluate Returns and Raise Missing-Animal Alerts,Abnormalities,Partial,"POST /api/alerts/evaluate-missing; policy is illustrative, not approved"
+UC-10,Evaluate RFID Reads and Raise Unexpected-Animal Alerts,Abnormalities,Implemented,Unknown/wrong-barn alerts from RFID ingestion
+UC-11,Review and Disposition an Animal Alert,Abnormalities,Implemented,PATCH /api/alerts/{id}/acknowledge|resolve
+UC-12,Initiate an Inter-Barn or Inter-Farm Transfer,Animal Movement,Implemented,POST /api/transfers
+UC-13,Complete and Reconcile a Cattle Transfer,Animal Movement,Implemented,PATCH /api/transfers/{id}/approve|complete
+UC-14,Record an Animal Vaccination,Animal Health,Partial (mobile web; simulated RFID),POST /api/health type=VACCINATION; /field responsive browser form; no native mobile reader SDK
+UC-15,Record an Animal Health Assessment,Animal Health,Partial (mobile web; simulated RFID),POST /api/health type=ASSESSMENT; /field responsive browser form; no native mobile reader SDK
+UC-16,Record an Animal Treatment,Animal Health,Implemented,POST /api/health type=TREATMENT
+UC-17,View Animal Health and Movement History,Animal Health,Implemented (basic),GET /api/cattle/{id}/history; web profile history modal lists health/movement/transfer records
+UC-18,Record a Disease Outbreak Observation,Animal Health,Implemented,POST /api/health type=OUTBREAK; GET /api/surveillance
+UC-19,Generate an Operational or Health Report,Reporting & Integration,Partial,GET /api/dashboard and /api/reports/summary; only basic reporting
+UC-20,Export a Report to a Supported Format,Reporting & Integration,Implemented,GET /api/reports/export?entity=...&format=csv|json
+UC-21,Transmit Health Surveillance Data via API,Reporting & Integration,Mock only,POST /api/integrations/surveillance-export; national API contract unavailable
+UC-22,View Executive Monitoring Dashboard,Dashboards,Implemented,Dashboard aggregates under executive role
+UC-23,View Farm Operations Dashboard,Dashboards,Implemented,Dashboard with farm/barn role scopes
+UC-24,Authenticate a Human User,Security & Audit,Implemented,POST /api/auth/login; JWT
+UC-25,Manage User Accounts and Role Assignments,Security & Audit,Partial,GET/POST/PATCH /api/users; some policies remain unconfirmed
+UC-26,Review and Filter Audit Logs,Security & Audit,Implemented,GET /api/audit (admin)
+UC-27,Monitor Reader Connectivity and Status,Farm & Reader Setup,Partial,"Reader last_seen, gateway status, sync ledger; no remote heartbeat SLA"
+UC-28,Configure Missing-Animal Evaluation Policy,Abnormalities,Partial,GET /api/alerts/policies; PUT /api/alerts/policies/{farm_id}; manual evaluation
+UC-29,Identify an Animal Using a Mobile RFID Reader,Mobile Health,Partial (M2 derived),"GET /api/health/scan/{epc}; responsive mobile web /field supports keyboard-wedge or typed EPC; no native reader SDK"
+UC-30,Synchronize Deferred RFID Movement Transactions,Farm Gateway / Synchronization,Implemented (M2 derived),Offline SQLite queue + retry + central idempotent sync
+UC-31,Review and Resolve Synchronization Exceptions (Proposed),Farm Gateway / Operations,Proposed / partial,Queue inspection with last_error; manual resolution workflow not implemented

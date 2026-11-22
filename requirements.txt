@@ -1,0 +1,2 @@
+-r backend/requirements-dev.txt
+python-dotenv>=1.0,<2
